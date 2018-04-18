@@ -31,8 +31,8 @@ RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 644 {} \; \
     && sed -i 's/8080/80/g' /etc/httpd/conf/httpd.conf \
     && echo 'extension=mysqli' >> /etc/php.ini \
-    && rm -rf /run/httpd/* /tmp/httpd*
-
+    && rm -rf /run/httpd/* /tmp/httpd* \
+    && chown -R apache: /run/httpd
 
 EXPOSE 8080
 
