@@ -24,7 +24,6 @@ RUN     yum -y --setopt=tsflags=nodocs update \
         && rm -rf /var/cache/yum/* \
         && yum clean all
 
-ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/run-httpd.sh /usr/local/bin
 ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/reviews.html /usr/local/html
 ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/addreview.php /usr/local/html
 
