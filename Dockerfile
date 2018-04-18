@@ -31,7 +31,7 @@ ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/addreview.php
 RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 644 {} \; \
     && sed -i 's/8080/80/g' /etc/httpd/conf/httpd.conf \
-    && chown -R apache: /usr/local/bin/run-httpd.sh
+    && chown -R apache: /usr/local/bin/run-httpd.sh \
     && chmod -v +x /usr/local/bin/run-httpd.sh
 
 EXPOSE 8080
