@@ -1,0 +1,80 @@
+{
+    "apiVersion": "v1",
+    "kind": "Template",
+    "labels": {
+	"app": "dotaznik-php-mariadb",
+	"template": "dotaznik-php-mariadb"
+    },
+    "message": "Následující aplikace byla vytvořena ve Vašem projektu: ${NAME}, ${DATABASE_SERVICE_NAME}.",
+    "metadata": {
+	"annotations": {
+		"description": "Ukázková PHP aplikace, běžící na dvou Docker kontejnerech: Apache HTTPd a MariaDB.",
+		"iconClass": "icon-php",
+		"openshift.io/display-name": "Dotazník aplikace (Apache HTTPd, PHP + MariaDB SQL (Ephemeral))",
+		"openshift.io/provider-display-name": "Jindřich Káňa",
+		"openshift.io/support-url": "https://github.com/mipam007",
+		"tags": "quickstart,php,httpd,mariadb,dotaznik",
+		"template.openshift.io/bindable": "false"
+      	},
+	"name": "dotaznik-php-mariadb"
+    },
+    "objects": [
+	{
+		"apiVersion": "v1",
+		"kind": "BuildConfig",
+		"metadata": {
+			"annotations": {
+				"description": "Definice sestavení",
+				"template.alpha.openshift.io/wait-for-ready": "true"
+			},
+			"name": "${NAME}"
+		},
+		"spec": {
+			"output": {
+				"to": {
+					"kind": "ImageStreamTag",
+					"name": ""${NAME}:latest"
+				}
+			},
+			"source": {
+				"contextDir": "${CONTEXT_DIR}",
+				"git": {
+					"ref": "${SOURCE_REPOSITORY_REF}",
+					"uri": "${SOURCE_REPOSITORY_URL}"
+				},
+				"type": "Git"
+			},
+			"strategy": {
+				"sourceStrategy": {
+					"env": [
+						{
+							"name": "COMPOSER_MIRROR",
+							"value": "${COMPOSER_MIRROR}"
+						}
+					],
+					"from": {
+						"kind": "ImageStreamTag",
+						"name": "centos:7",
+						"namespace": "${NAMESPACE}"
+					}
+				},
+				"type": "Source"
+			},
+			"triggers": [
+				{
+					"type": "ImageChange"
+				},
+				{
+					"type": "ConfigChange"
+				},
+				{
+					"github": {
+						"secret": "${GITHUB_WEBHOOK_SECRET}"
+					},
+					"type": "GitHub"
+				}
+			]
+		}
+	},
+
+ 

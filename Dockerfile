@@ -1,6 +1,6 @@
-FROM docker-registry-default.rocp.vs.csint.cz/rhscl/centos
+FROM docker-registry-default.rocp.vs.csint.cz/rhscl/centos:7
 
-MAINTAINER Jindřich Káňa <jindrich.kana@gmail.com>
+LABEL Maintainer="Jindřich Káňa <jindrich.kana@gmail.com>"
 LABEL Vendor="ELOS Technologies, s.r.o."
 
 RUN     yum -y --setopt=tsflags=nodocs update \
@@ -30,8 +30,7 @@ ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/addreview.php
 RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 644 {} \; \
     && sed -i 's/8080/80/g' /etc/httpd/conf/httpd.conf \
-    && echo 'extension=mysqli' >> /etc/php.ini \
-    && chown -R apache: /run/httpd
+    && echo 'extension=mysqli' >> /etc/php.ini
 
 EXPOSE 8080
 
