@@ -1,5 +1,13 @@
 FROM centos:7
 
+## OpenShift hack ##
+# oc create serviceaccount sa-apache
+# oc edit scc anyuid
+## - system:serviceaccount:<project_name>:sa-apache
+# oc edit dc/<dc_name>
+## serviceAccount: sa-apache
+## serviceAccountName: sa-apache
+
 LABEL Maintainer="Jindřich Káňa <jindrich.kana@gmail.com>"
 LABEL Vendor="ELOS Technologies, s.r.o."
 
@@ -30,11 +38,10 @@ ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/addreview.php
 RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 644 {} \; \
     && sed -i 's/80/8080/g' /etc/httpd/conf/httpd.conf \
-    && rm -rf /etc/httpd/conf.d/* \
-    && chown -R apache: /var/log/httpd \
-    && chown -R apache: /run/httpd \
-    && echo 'extension=mysqli.so' >> /etc/php.ini \
     && echo "ServerName $(hostname -f)" >> /etc/httpd/conf/httpd.conf \
+    && echo 'extension=mysqli.so' >> /etc/php.ini \
+    && rm -rf /etc/httpd/conf.d/* \
+    && chown -R apache: /var/log/httpd /run/httpd \
     && ln -sf /dev/stdout /var/log/httpd/access_log \
     && ln -sf /dev/stderr /var/log/httpd/error_log 
 
