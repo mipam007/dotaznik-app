@@ -1,12 +1,12 @@
-FROM centos:7
+FROM barvyovy/centos:7
 
 ## OpenShift hack ##
 # oc create serviceaccount sa-apache
 # oc edit scc anyuid
-## - system:serviceaccount:<project_name>:sa-apache
+# - system:serviceaccount:<project_name>:sa-apache
 # oc edit dc/<dc_name>
-## serviceAccount: sa-apache
-## serviceAccountName: sa-apache
+# serviceAccount: sa-apache
+# serviceAccountName: sa-apache
 
 LABEL Maintainer="Jindřich Káňa <jindrich.kana@gmail.com>"
 LABEL Vendor="ELOS Technologies, s.r.o."
