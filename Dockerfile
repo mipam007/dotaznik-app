@@ -1,4 +1,4 @@
-FROM docker-registry-default.rocp.vs.csint.cz/rhscl/centos:7
+FROM centos:7
 
 LABEL Maintainer="Jindřich Káňa <jindrich.kana@gmail.com>"
 LABEL Vendor="ELOS Technologies, s.r.o."
@@ -24,16 +24,22 @@ RUN     yum -y --setopt=tsflags=nodocs update \
         && yum clean all \
         && rm -rf /var/cache/yum
 
-ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/reviews.html /usr/local/html
-ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/addreview.php /usr/local/html
+ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/reviews.html /var/www/html
+ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/addreview.php /var/www/html
 
 RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 644 {} \; \
-    && sed -i 's/8080/80/g' /etc/httpd/conf/httpd.conf \
-    && echo 'extension=mysqli' >> /etc/php.ini
+    && sed -i 's/80/8080/g' /etc/httpd/conf/httpd.conf \
+    && rm -rf /etc/httpd/conf.d/* \
+    && chown -R apache: /var/log/httpd \
+    && chown -R apache: /run/httpd \
+    && echo 'extension=mysqli.so' >> /etc/php.ini \
+    && echo "ServerName $(hostname -f)" >> /etc/httpd/conf/httpd.conf \
+    && ln -sf /dev/stdout /var/log/httpd/access_log \
+    && ln -sf /dev/stderr /var/log/httpd/error_log 
 
 EXPOSE 8080
 
 USER apache
 
-ENTRYPOINT ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/httpd",  "-D", "FOREGROUND"]

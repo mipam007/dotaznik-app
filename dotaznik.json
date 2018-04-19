@@ -21,6 +21,53 @@
     "objects": [
 	{
 		"apiVersion": "v1",
+		"kind": "Service",
+		"metadata": {
+			"annotations": {
+				"description": "vystavenení aplikace a její vyvažování",
+				"service.alpha.openshift.io/dependencies": "[{\"name\": \"${DATABASE_SERVICE_NAME}\", \"kind\": \"Service\"}]"
+			},
+			"name": "${NAME}"
+		},
+		"spec": {
+			"ports": [
+				{
+					"name": "web",
+					"port": 8080,
+					"targetPort": 8080
+				}
+			],
+			"selector": {
+				"name": "${NAME}"
+			}
+		}
+	},
+        {
+		"apiVersion": "v1",
+		"kind": "Route",
+		"metadata": {
+			"name": "${NAME}"
+		},
+		"spec": {
+			"host": "${APPLICATION_DOMAIN}",
+			"to": {
+				"kind": "Service",
+				"name": "${NAME}"
+			}
+		}
+	},
+	{
+		"apiVersion": "v1",
+		"kind": "ImageStream",
+		"metadata": {
+			"annotations": {
+			"description": "sleduje změny v aplikačním obraze"
+		},
+			"name": "${NAME}"
+		}
+	},
+	{
+		"apiVersion": "v1",
 		"kind": "BuildConfig",
 		"metadata": {
 			"annotations": {
@@ -31,9 +78,9 @@
 		},
 		"spec": {
 			"output": {
-				"to": {
-					"kind": "ImageStreamTag",
-					"name": ""${NAME}:latest"
+			"to": {
+				"kind": "ImageStreamTag",
+				"name": ""${NAME}:latest"
 				}
 			},
 			"source": {
@@ -58,7 +105,7 @@
 						"namespace": "${NAMESPACE}"
 					}
 				},
-				"type": "Source"
+				"type": "Docker"
 			},
 			"triggers": [
 				{
@@ -73,8 +120,8 @@
 					},
 					"type": "GitHub"
 				}
-			]
+			
 		}
-	},
-
- 
+	}
+	}
+}
