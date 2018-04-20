@@ -18,6 +18,7 @@ RUN     yum -y --setopt=tsflags=nodocs update \
         gcc-c++ \
         httpd \
         mod_ssl \
+	mariadb \
         php \
         php-cli \
         php-devel \
