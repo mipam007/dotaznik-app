@@ -142,5 +142,26 @@
 				}
 			}
 		}
-		]
+		],
+    "parameters": [
+        {
+            "description": "Název všech frontendových objektů definovaných v template",
+            "displayName": "Name",
+            "name": "NAME",
+            "required": true,
+            "value": ""
+        },
+        {
+            "description": "Git URL se zdrojovými kódy.",
+            "displayName": "Git Repository URL",
+            "name": "SOURCE_REPOSITORY_URL",
+            "required": true,
+            "value": ""
+        },
+        {
+            "description": "The exposed hostname that will route to the CakePHP service, if left blank a value will be defaulted.",
+            "displayName": "Application Hostname",
+            "name": "APPLICATION_DOMAIN",
+            "value": ""
+        }
 }
