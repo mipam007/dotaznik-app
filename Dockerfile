@@ -1,4 +1,4 @@
-FROM barvyovy/centos:7
+FROM centos:7
 
 ## OpenShift hack ##
 # oc create serviceaccount sa-apache
