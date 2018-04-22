@@ -5,14 +5,13 @@
 		"description": "pojďme se najest",
 		"name": "dotaznik"
 	},
-	"items": [
+	"objects": [
 		{
 			"apiVersion": "v1",
 			"kind": "BuildConfig",
 			"metadata": {
 				"annotations": {
-				"description": "Definice sestavení",
-				"template.alpha.openshift.io/wait-for-ready": "true"
+				"description": "Definice sestavení"
 				},
 				"name": "${NAME}"
 				},
@@ -24,15 +23,13 @@
 				}
 				},
 				"source": {
-					"contextDir": "${CONTEXT_DIR}",
+					"type": "Git",
 					"git": {
-					"ref": "${SOURCE_REPOSITORY_REF}",
-					"uri": "${SOURCE_REPOSITORY_URL}"
-				},
-				"type": "Git"
+						"uri": "${SOURCE_REPOSITORY_URL}"
+					}
 				},
 				"strategy": {
-					"type": "Docker"
+					"type": "Dockerifile"
 				},
 				"triggers": [
 					{
