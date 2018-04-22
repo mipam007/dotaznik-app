@@ -42,6 +42,7 @@ RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 644 {} \; \
     && sed -i 's/80/8080/g' /etc/httpd/conf/httpd.conf \
     && sed -i 's/DirectoryIndex\ index\.html/DirectoryIndex\ index\.html\ index\.php/g' /etc/httpd/conf/httpd.conf \
+    && sed -i '/\<IfModule\ mime\_module\>/a AddType\ application\/x\-httpd\-php\ \.php' /etc/httpd/conf/httpd.conf \
     && echo "ServerName $(hostname -f)" >> /etc/httpd/conf/httpd.conf \
     && echo 'extension=mysqli.so' >> /etc/php.ini \
     && rm -rf /etc/httpd/conf.d/* \
