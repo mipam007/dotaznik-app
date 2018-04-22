@@ -69,17 +69,6 @@
 					"type": "Recreate"
 				}
 			},
-				"template": {
-					"metadata": {
-						"labels": {
-							"name": "${DATABASE_SERVICE_NAME}"
-						}
-					},
-						"name": "${NAME}"
-				},
-				"selector": {
-					"name": "${NAME}"
-				},
 					"spec": {
 						"containers": [
 							{
