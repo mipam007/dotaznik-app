@@ -1,6 +1,6 @@
 <?php
 
-$hostname = "db-barvyovy.nocp.vs.csint.cz";
+$hostname = "db";
 $username = "hodnoceni";
 $password = "hodnoceni";
 $db = "reviews";
