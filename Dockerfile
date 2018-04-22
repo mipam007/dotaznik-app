@@ -40,7 +40,7 @@ ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/info.php /var
 RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 644 {} \; \
     && sed -i 's/80/8080/g' /etc/httpd/conf/httpd.conf \
-    && sed -i 'DirectoryIndex\ index\.html/DirectoryIndex\ index\.html\ index\.php/g' \
+    && sed -i 's/DirectoryIndex\ index\.html/DirectoryIndex\ index\.html\ index\.php/g' \
     && echo "ServerName $(hostname -f)" >> /etc/httpd/conf/httpd.conf \
     && echo 'extension=mysqli.so' >> /etc/php.ini \
     && rm -rf /etc/httpd/conf.d/* \
