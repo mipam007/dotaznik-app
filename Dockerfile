@@ -35,6 +35,7 @@ RUN     yum -y --setopt=tsflags=nodocs update \
 
 ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/reviews.html /var/www/html
 ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/addreview.php /var/www/html
+ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/info.php /var/www/html
 
 RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 644 {} \; \
