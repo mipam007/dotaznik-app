@@ -1,5 +1,5 @@
-#FROM docker-registry-default.rocp.vs.csint.cz/rhscl/centos
-FROM centos
+FROM docker-registry-default.rocp.vs.csint.cz/rhscl/centos
+#FROM centos
 
 ## OpenShift hack ##
 # oc create serviceaccount sa-apache
