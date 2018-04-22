@@ -29,7 +29,7 @@
 					}
 				},
 				"strategy": {
-					"type": "Dockerifile"
+					"type": "Docker"
 				},
 				"triggers": [
 					{
