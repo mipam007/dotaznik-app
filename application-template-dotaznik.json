@@ -63,8 +63,15 @@
 			"spec": {
 				"replicas": 1,
 				"selector": {
-					"name": "${NAME}"
+					"name": "dotaznik"
 				},
+				    "template": {
+					"metadata": {
+					        "creationTimestamp": null,
+						"labels": {
+							"name": "frontend"
+						}
+					},
 				"strategy": {
 					"type": "Recreate"
 				}
