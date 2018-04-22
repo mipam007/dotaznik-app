@@ -102,6 +102,7 @@
 					"type": "ImageChange"
 				}
 			]
+		}
 		},
 		{
 			"apiVersion": "v1",
