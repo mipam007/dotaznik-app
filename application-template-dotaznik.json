@@ -13,7 +13,7 @@
 				"annotations": {
 				"description": "Definice sestavení"
 				},
-				"name": "${NAME}"
+				"name": "dotaznik"
 				},
 			"spec": {
 				"output": {
@@ -48,7 +48,7 @@
 				"annotations": {
 				"description": "sleduje změny v aplikačním obraze"
 				},
-				"name": "${NAME}"
+				"name": "dotaznikis"
 			}
 		},
 		{
@@ -58,7 +58,7 @@
 				"annotations": {
 					"description": "Nasazení webové aplikace"
 				},
-				"name": "${NAME}"
+				"name": "dotaznik"
 			},
 			"spec": {
 				"replicas": 1,
@@ -117,7 +117,7 @@
 				"annotations": {
 					"description": "vystavenení aplikace a její vyvažování"
 					},
-					"name": "${NAME}"
+					"name": "dotaznik"
 				},
 			"spec": {
 				"ports": [
@@ -129,7 +129,7 @@
 					}
 				],
 				"selector": {
-					"name": "${NAME}"
+					"name": "dotaznik"
 				}
 			}
 		}
