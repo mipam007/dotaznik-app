@@ -8,41 +8,6 @@
 	"objects": [
 		{
 			"apiVersion": "v1",
-			"kind": "BuildConfig",
-			"metadata": {
-				"annotations": {
-				"description": "Definice sestavení"
-				},
-				"name": "dotaznik"
-				},
-			"spec": {
-				"output": {
-				"to": {
-					"kind": "ImageStreamTag",
-					"name": "${NAME}:latest"
-				}
-				},
-				"source": {
-					"type": "Git",
-					"git": {
-						"uri": "${SOURCE_REPOSITORY_URL}"
-					}
-				},
-				"strategy": {
-					"type": "Docker"
-				},
-				"triggers": [
-					{
-						"type": "ConfigChange"
-					},
-					{
-						"type": "ImageChange"
-					}
-				]
-			}
-		},
-		{
-			"apiVersion": "v1",
 			"kind": "ImageStream",
 			"metadata": {
 				"annotations": {
