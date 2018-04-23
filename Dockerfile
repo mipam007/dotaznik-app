@@ -1,5 +1,5 @@
-#FROM docker-registry-default.rocp.vs.csint.cz/rhscl/centos
-FROM centos
+FROM docker-registry-default.rocp.vs.csint.cz/rhscl/centos
+#FROM centos
 
 ## OpenShift hack ##
 # oc create serviceaccount sa-apache
@@ -38,13 +38,14 @@ ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/reviews.html 
 ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/addreview.php /var/www/html
 ADD https://raw.githubusercontent.com/mipam007/dotaznik-app/master/info.php /var/www/html
 
+ENV SERVER_NAME="localhost"
+
 RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 644 {} \; \
     && sed -i 's/80/8080/g' /etc/httpd/conf/httpd.conf \
     && sed -i 's/DirectoryIndex\ index\.html/DirectoryIndex\ index\.html\ index\.php/g' /etc/httpd/conf/httpd.conf \
     && sed -i '/\<IfModule\ mime\_module\>/a AddType\ application\/x\-httpd\-php\ \.php' /etc/httpd/conf/httpd.conf \
-    && sed -i '/\#ServerName\ www\.example\.com\:8080/a ServerName\ \$\{HTTPD_SERVER_NAME\}' /etc/httpd/conf/httpd.conf \
-#    && echo "ServerName $(hostname -f)" >> /etc/httpd/conf/httpd.conf \
+    && sed -i '/\#ServerName\ www\.example\.com\:8080/a ServerName\ \$\{SERVER_NAME\}' /etc/httpd/conf/httpd.conf \
     && echo 'extension=mysqli.so' >> /etc/php.ini \
     && rm -rf /etc/httpd/conf.d/* \
     && chown -R apache: /var/log/httpd /run/httpd \
@@ -55,6 +56,5 @@ EXPOSE 8080
 
 USER apache
 
-CMD ["export", "HTTPD_SERVER_NAME=$(hostname -f)"]
-
-ENTRYPOINT ["/usr/sbin/httpd",  "-D", "FOREGROUND"]
+ENTRYPOINT ["/usr/sbin/httpd"]
+CMD ["-D", "FOREGROUND"]
