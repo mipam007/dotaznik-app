@@ -20,27 +20,52 @@
 			"apiVersion": "v1",
 			"kind": "ServiceAccount",
 			"metadata": {
-				"name": "sa-apache"
+				"name": "anyuid-sa-apache"
 			}
 		},
 		{
 			"kind": "SecurityContextConstraints",
 			"apiVersion": "v1",
 			"metadata": {
-				        "name": "anyuid-dotaznik"
+				"annotations": {
+				"kubernetes.io/description": "anyuid provides all features of the restricted SCC but allows users to run with any UID and any GID."
+				},
+			        "name": "anyuid-sapache"
 			},
+			"priority": 10,
+			"allowPrivilegedContainer": false,
+			"defaultAddCapabilities": [],
+			"requiredDropCapabilities": [
+				"MKNOD",
+				"SYS_CHROOT"
+			],
+			"allowedCapabilities": [],
+			"allowHostDirVolumePlugin": false,
+			"volumes": [
+				"configMap",
+				"downwardAPI",
+				"emptyDir",
+				"persistentVolumeClaim",
+				"projected",
+				"secret"
+			],
+			"allowHostNetwork": false,
+			"allowHostPorts": false,
+			"allowHostPID": false,
+			"allowHostIPC": false,
 			"seLinuxContext": {
-			    "type": "MustRunAs"
+		        "type": "MustRunAs"
 			},
 			"runAsUser": {
-			    "type": "RunAsAny"
+				"type": "RunAsAny"
 			},
 			"supplementalGroups": {
-			    "type": "RunAsAny"
+				"type": "RunAsAny"
 			},
 			"fsGroup": {
-			    "type": "RunAsAny"
+				"type": "RunAsAny"
 			},
+			"readOnlyRootFilesystem": false,
 			"users": [
 				"system:serviceaccount:barvyovy:sa-apache"
 			]
