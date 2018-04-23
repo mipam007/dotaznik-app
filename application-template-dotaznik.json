@@ -24,6 +24,25 @@
 			}
 		},
 		{
+			"kind": "SecurityContextConstraints",
+			"apiVersion": "v1",
+			"metadata": {
+				"name": "sa-apache"
+				},
+			"runAsUser": {
+				"type": "RunAsAny"
+				},
+			"seLinuxContext": {
+				"type": "MustRunAs"
+			},
+			"supplementalGroups": {
+				"type": "RunAsAny"
+			},
+			"users": {
+				"type": "- my-admin-user"
+			}
+		},
+		{
 			"apiVersion": "v1",
 			"kind": "DeploymentConfig",
 			"metadata": {
