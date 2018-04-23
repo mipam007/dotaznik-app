@@ -8,16 +8,6 @@
 	"objects": [
 		{
 			"apiVersion": "v1",
-			"kind": "ImageStream",
-			"metadata": {
-				"annotations": {
-				"description": "sleduje změny v aplikačním obraze"
-				},
-				"name": "dotaznikis"
-			}
-		},
-		{
-			"apiVersion": "v1",
 			"kind": "ServiceAccount",
 			"metadata": {
 				"name": "anyuid-sa-apache"
@@ -54,7 +44,7 @@
 			"allowHostPID": false,
 			"allowHostIPC": false,
 			"seLinuxContext": {
-		        "type": "MustRunAs"
+				"type": "MustRunAs"
 			},
 			"runAsUser": {
 				"type": "RunAsAny"
@@ -154,6 +144,16 @@
 			                        "schedulerName": "default-scheduler"
 					}
 				}
+			}
+		},
+		{
+			"apiVersion": "v1",
+			"kind": "ImageStream",
+			"metadata": {
+				"annotations": {
+				"description": "sleduje změny v aplikačním obraze"
+				},
+				"name": "dotaznikis"
 			}
 		},
 		{
