@@ -10,7 +10,7 @@
 			"apiVersion": "v1",
 			"kind": "ServiceAccount",
 			"metadata": {
-				"name": "anyuid-sa-apache"
+				"name": "anyuid-sapache"
 			}
 		},
 		{
@@ -57,7 +57,7 @@
 			},
 			"readOnlyRootFilesystem": false,
 			"users": [
-				"system:serviceaccount:barvyovy:sa-apache"
+				"system:serviceaccount:barvyovy:anyuid-sapache"
 			]
 		},
 		{
@@ -88,15 +88,6 @@
 				"triggers": [
 					{
 						"type": "ConfigChange"
-					},
-					{
-		                        	"type": "ImageChange",
-						"imageChangeParams": {
-							"automatic": true,
-							"containerNames": [
-								"dotaznik"
-							]
-						}
 					}
 				],
 				"replicas": 1,
@@ -117,7 +108,7 @@
 						"containers": [
 							{
 				                                "name": "dotaznik",
-				                                "image": "docker-registry.default.svc:5000/barvyovy/dotaznik@sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f",
+                                                                "image": "barvyovy/dotaznik:latest",
 				                                "ports": [
 									{
 					                                        "containerPort": 8080,
@@ -133,8 +124,8 @@
 			                        "restartPolicy": "Always",
 			                        "terminationGracePeriodSeconds": 30,
 			                        "dnsPolicy": "ClusterFirst",
-			                        "serviceAccountName": "sa-apache",
-			                        "serviceAccount": "sa-apache",
+			                        "serviceAccountName": "anyuid-sapache",
+			                        "serviceAccount": "anyuid-sapache",
 			                        "securityContext": {},
 			                        "schedulerName": "default-scheduler"
 					}
