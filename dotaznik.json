@@ -1,0 +1,1527 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "dotaznik",
+        "creationTimestamp": null
+    },
+    "objects": [
+        {
+            "kind": "BuildConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "db",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "db"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "triggers": [
+                    {
+                        "type": "GitHub",
+                        "github": {
+                            "secret": "t-M-u2BPpfyJr-EYIdVk"
+                        }
+                    },
+                    {
+                        "type": "Generic",
+                        "generic": {
+                            "secret": "NSPo8O202LOyvdiMYfuO"
+                        }
+                    },
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChange": {}
+                    }
+                ],
+                "runPolicy": "Serial",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/mipam007/dotaznik-db.git"
+                    }
+                },
+                "strategy": {
+                    "type": "Docker",
+                    "dockerStrategy": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "name": "centos:latest"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "db:latest"
+                    }
+                },
+                "resources": {},
+                "postCommit": {},
+                "nodeSelector": null,
+                "successfulBuildsHistoryLimit": 5,
+                "failedBuildsHistoryLimit": 5
+            },
+            "status": {
+                "lastVersion": 0
+            }
+        },
+        {
+            "kind": "BuildConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotaznik",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "dotaznik"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "triggers": [
+                    {
+                        "type": "GitHub",
+                        "github": {
+                            "secret": "DyX3qWgoAVHzYDuVcCdY"
+                        }
+                    },
+                    {
+                        "type": "Generic",
+                        "generic": {
+                            "secret": "NCJe2WAcvtONjHJrHj3A"
+                        }
+                    },
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChange": {}
+                    }
+                ],
+                "runPolicy": "Serial",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/mipam007/dotaznik-app.git"
+                    }
+                },
+                "strategy": {
+                    "type": "Docker",
+                    "dockerStrategy": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "name": "centos:latest"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "dotaznik:latest"
+                    }
+                },
+                "resources": {},
+                "postCommit": {},
+                "nodeSelector": null,
+                "successfulBuildsHistoryLimit": 5,
+                "failedBuildsHistoryLimit": 5
+            },
+            "status": {
+                "lastVersion": 0
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "db-1",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "db",
+                    "buildconfig": "db",
+                    "openshift.io/build-config.name": "db",
+                    "openshift.io/build.start-policy": "Serial"
+                },
+                "annotations": {
+                    "openshift.io/build-config.name": "db",
+                    "openshift.io/build.number": "1",
+                    "openshift.io/build.pod-name": "db-1-build"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "build.openshift.io/v1",
+                        "kind": "BuildConfig",
+                        "name": "db",
+                        "uid": "b1ac1431-46b6-11e8-ab4f-001a4a0a1e37",
+                        "controller": true
+                    }
+                ]
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/mipam007/dotaznik-db.git"
+                    }
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "9d2436229f6e2a65e2b1eeb8f4be6968e49cda6c",
+                        "author": {
+                            "name": "Jindřich Káňa",
+                            "email": "jindrich.kana@elostech.cz"
+                        },
+                        "committer": {
+                            "name": "Jindřich Káňa",
+                            "email": "jindrich.kana@elostech.cz"
+                        },
+                        "message": "úprava konfigů pro DB a PHP"
+                    }
+                },
+                "strategy": {
+                    "type": "Docker",
+                    "dockerStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "docker-registry-default.rocp.vs.csint.cz/rhscl/centos@sha256:8c7ac054adab3692f7026d49fd1c4df69aa6a138b2f076b432d2ac0164c022d3"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "db:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-rxxhp"
+                    }
+                },
+                "resources": {},
+                "postCommit": {},
+                "nodeSelector": null,
+                "triggeredBy": [
+                    {
+                        "message": "Build configuration change"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "docker-registry.default.svc:5000/barvyovy/db:latest",
+                "config": {
+                    "name": "db"
+                },
+                "output": {
+                    "to": {
+                        "imageDigest": "sha256:4c8d8a64a1b1a00dbc3c9f4157681e6eb6a915c30eb0ab1d96988c209031db00"
+                    }
+                },
+                "stages": [
+                    {
+                        "name": "FetchInputs",
+                        "startTime": "2018-04-23T05:25:22Z",
+                        "durationMilliseconds": 2664,
+                        "steps": [
+                            {
+                                "name": "FetchGitSource",
+                                "startTime": "2018-04-23T05:25:22Z",
+                                "durationMilliseconds": 2664
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Build",
+                        "startTime": "2018-04-23T05:25:25Z",
+                        "durationMilliseconds": 15548,
+                        "steps": [
+                            {
+                                "name": "DockerBuild",
+                                "startTime": "2018-04-23T05:25:25Z",
+                                "durationMilliseconds": 15548
+                            }
+                        ]
+                    },
+                    {
+                        "name": "PostCommit",
+                        "startTime": "2018-04-23T05:25:40Z",
+                        "steps": [
+                            {
+                                "name": "RunPostCommitHook",
+                                "startTime": "2018-04-23T05:25:40Z"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "PushImage",
+                        "startTime": "2018-04-23T05:25:40Z",
+                        "durationMilliseconds": 1530,
+                        "steps": [
+                            {
+                                "name": "PushDockerImage",
+                                "startTime": "2018-04-23T05:25:40Z",
+                                "durationMilliseconds": 1530
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotaznik-1",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "dotaznik",
+                    "buildconfig": "dotaznik",
+                    "openshift.io/build-config.name": "dotaznik",
+                    "openshift.io/build.start-policy": "Serial"
+                },
+                "annotations": {
+                    "openshift.io/build-config.name": "dotaznik",
+                    "openshift.io/build.number": "1",
+                    "openshift.io/build.pod-name": "dotaznik-1-build"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "build.openshift.io/v1",
+                        "kind": "BuildConfig",
+                        "name": "dotaznik",
+                        "uid": "f45b8357-46b6-11e8-ab4f-001a4a0a1e37",
+                        "controller": true
+                    }
+                ]
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/mipam007/dotaznik-app.git"
+                    }
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "56fa9d019b9dd5a1111d4a8b2eb92638976e8dec",
+                        "author": {
+                            "name": "Jindřich Káňa",
+                            "email": "jindrich.kana@elostech.cz"
+                        },
+                        "committer": {
+                            "name": "Jindřich Káňa",
+                            "email": "jindrich.kana@elostech.cz"
+                        },
+                        "message": "úpravy v DC"
+                    }
+                },
+                "strategy": {
+                    "type": "Docker",
+                    "dockerStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "docker-registry-default.rocp.vs.csint.cz/rhscl/centos@sha256:8c7ac054adab3692f7026d49fd1c4df69aa6a138b2f076b432d2ac0164c022d3"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "dotaznik:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-rxxhp"
+                    }
+                },
+                "resources": {},
+                "postCommit": {},
+                "nodeSelector": null,
+                "triggeredBy": [
+                    {
+                        "message": "Build configuration change"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "docker-registry.default.svc:5000/barvyovy/dotaznik:latest",
+                "config": {
+                    "name": "dotaznik"
+                },
+                "output": {
+                    "to": {
+                        "imageDigest": "sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f"
+                    }
+                },
+                "stages": [
+                    {
+                        "name": "FetchInputs",
+                        "startTime": "2018-04-23T05:27:13Z",
+                        "durationMilliseconds": 4334,
+                        "steps": [
+                            {
+                                "name": "FetchGitSource",
+                                "startTime": "2018-04-23T05:27:13Z",
+                                "durationMilliseconds": 4334
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Build",
+                        "startTime": "2018-04-23T05:27:17Z",
+                        "durationMilliseconds": 111994,
+                        "steps": [
+                            {
+                                "name": "DockerBuild",
+                                "startTime": "2018-04-23T05:27:17Z",
+                                "durationMilliseconds": 111994
+                            }
+                        ]
+                    },
+                    {
+                        "name": "PostCommit",
+                        "startTime": "2018-04-23T05:29:09Z",
+                        "steps": [
+                            {
+                                "name": "RunPostCommitHook",
+                                "startTime": "2018-04-23T05:29:09Z"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "PushImage",
+                        "startTime": "2018-04-23T05:29:09Z",
+                        "durationMilliseconds": 3138,
+                        "steps": [
+                            {
+                                "name": "PushDockerImage",
+                                "startTime": "2018-04-23T05:29:09Z",
+                                "durationMilliseconds": 3138
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "centos",
+                "generation": 2,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "db"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/image.dockerRepositoryCheck": "2018-04-23T05:25:11Z"
+                }
+            },
+            "spec": {
+                "lookupPolicy": {
+                    "local": false
+                },
+                "tags": [
+                    {
+                        "name": "latest",
+                        "annotations": {
+                            "openshift.io/imported-from": "docker-registry-default.rocp.vs.csint.cz/rhscl/centos"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "docker-registry.default.svc:5000/barvyovy/centos:latest"
+                        },
+                        "generation": 2,
+                        "importPolicy": {},
+                        "referencePolicy": {
+                            "type": "Source"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "dockerImageRepository": ""
+            }
+        },
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "db",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "db"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "lookupPolicy": {
+                    "local": false
+                },
+                "tags": [
+                    {
+                        "name": "latest",
+                        "annotations": null,
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "docker-registry.default.svc:5000/barvyovy/db:latest"
+                        },
+                        "generation": null,
+                        "importPolicy": {},
+                        "referencePolicy": {
+                            "type": ""
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "dockerImageRepository": ""
+            }
+        },
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotaznik",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "dotaznik"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "lookupPolicy": {
+                    "local": false
+                },
+                "tags": [
+                    {
+                        "name": "latest",
+                        "annotations": null,
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "docker-registry.default.svc:5000/barvyovy/dotaznik:latest"
+                        },
+                        "generation": null,
+                        "importPolicy": {},
+                        "referencePolicy": {
+                            "type": ""
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "dockerImageRepository": ""
+            }
+        },
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "db",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "db"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Rolling",
+                    "rollingParams": {
+                        "updatePeriodSeconds": 1,
+                        "intervalSeconds": 1,
+                        "timeoutSeconds": 600,
+                        "maxUnavailable": "25%",
+                        "maxSurge": "25%"
+                    },
+                    "resources": {},
+                    "activeDeadlineSeconds": 21600
+                },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "db"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "namespace": "barvyovy",
+                                "name": "db:latest"
+                            }
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "test": false,
+                "selector": {
+                    "app": "db",
+                    "deploymentconfig": "db"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "db",
+                            "deploymentconfig": "db"
+                        },
+                        "annotations": {
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "db",
+                                "image": "docker-registry.default.svc:5000/barvyovy/db@sha256:4c8d8a64a1b1a00dbc3c9f4157681e6eb6a915c30eb0ab1d96988c209031db00",
+                                "ports": [
+                                    {
+                                        "containerPort": 3306,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {},
+                        "schedulerName": "default-scheduler"
+                    }
+                }
+            },
+            "status": {
+                "latestVersion": 0,
+                "observedGeneration": 0,
+                "replicas": 0,
+                "updatedReplicas": 0,
+                "availableReplicas": 0,
+                "unavailableReplicas": 0
+            }
+        },
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotaznik",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "dotaznik"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Rolling",
+                    "rollingParams": {
+                        "updatePeriodSeconds": 1,
+                        "intervalSeconds": 1,
+                        "timeoutSeconds": 600,
+                        "maxUnavailable": "25%",
+                        "maxSurge": "25%"
+                    },
+                    "resources": {},
+                    "activeDeadlineSeconds": 21600
+                },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "dotaznik"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "namespace": "barvyovy",
+                                "name": "dotaznik:latest"
+                            }
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "test": false,
+                "selector": {
+                    "app": "dotaznik",
+                    "deploymentconfig": "dotaznik"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "dotaznik",
+                            "deploymentconfig": "dotaznik"
+                        },
+                        "annotations": {
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "dotaznik",
+                                "image": "docker-registry.default.svc:5000/barvyovy/dotaznik@sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "serviceAccountName": "sa-apache",
+                        "serviceAccount": "sa-apache",
+                        "securityContext": {},
+                        "schedulerName": "default-scheduler"
+                    }
+                }
+            },
+            "status": {
+                "latestVersion": 0,
+                "observedGeneration": 0,
+                "replicas": 0,
+                "updatedReplicas": 0,
+                "availableReplicas": 0,
+                "unavailableReplicas": 0
+            }
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "db-1",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "db",
+                    "openshift.io/deployment-config.name": "db"
+                },
+                "annotations": {
+                    "openshift.io/deployer-pod.name": "db-1-deploy",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "db",
+                    "openshift.io/deployment.phase": "Complete",
+                    "openshift.io/deployment.replicas": "1",
+                    "openshift.io/deployment.status-reason": "image change",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"db\",\"namespace\":\"barvyovy\",\"selfLink\":\"/apis/apps.openshift.io/v1/namespaces/barvyovy/deploymentconfigs/db\",\"uid\":\"b20d1b07-46b6-11e8-ab4f-001a4a0a1e37\",\"resourceVersion\":\"3702934\",\"generation\":3,\"creationTimestamp\":\"2018-04-23T05:25:11Z\",\"labels\":{\"app\":\"db\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"strategy\":{\"type\":\"Rolling\",\"rollingParams\":{\"updatePeriodSeconds\":1,\"intervalSeconds\":1,\"timeoutSeconds\":600,\"maxUnavailable\":\"25%\",\"maxSurge\":\"25%\"},\"resources\":{},\"activeDeadlineSeconds\":21600},\"triggers\":[{\"type\":\"ConfigChange\"},{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"db\"],\"from\":{\"kind\":\"ImageStreamTag\",\"namespace\":\"barvyovy\",\"name\":\"db:latest\"},\"lastTriggeredImage\":\"docker-registry.default.svc:5000/barvyovy/db@sha256:4c8d8a64a1b1a00dbc3c9f4157681e6eb6a915c30eb0ab1d96988c209031db00\"}}],\"replicas\":1,\"test\":false,\"selector\":{\"app\":\"db\",\"deploymentconfig\":\"db\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"app\":\"db\",\"deploymentconfig\":\"db\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"containers\":[{\"name\":\"db\",\"image\":\"docker-registry.default.svc:5000/barvyovy/db@sha256:4c8d8a64a1b1a00dbc3c9f4157681e6eb6a915c30eb0ab1d96988c209031db00\",\"ports\":[{\"containerPort\":3306,\"protocol\":\"TCP\"}],\"resources\":{},\"terminationMessagePath\":\"/dev/termination-log\",\"terminationMessagePolicy\":\"File\",\"imagePullPolicy\":\"Always\"}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"securityContext\":{},\"schedulerName\":\"default-scheduler\"}}},\"status\":{\"latestVersion\":1,\"observedGeneration\":2,\"replicas\":0,\"updatedReplicas\":0,\"availableReplicas\":0,\"unavailableReplicas\":0,\"details\":{\"message\":\"image change\",\"causes\":[{\"type\":\"ImageChange\",\"imageTrigger\":{\"from\":{\"kind\":\"ImageStreamTag\",\"namespace\":\"barvyovy\",\"name\":\"db:latest\"}}}]},\"conditions\":[{\"type\":\"Available\",\"status\":\"False\",\"lastUpdateTime\":\"2018-04-23T05:25:12Z\",\"lastTransitionTime\":\"2018-04-23T05:25:12Z\",\"message\":\"Deployment config does not have minimum availability.\"}]}}\n"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps.openshift.io/v1",
+                        "kind": "DeploymentConfig",
+                        "name": "db",
+                        "uid": "b20d1b07-46b6-11e8-ab4f-001a4a0a1e37",
+                        "controller": true,
+                        "blockOwnerDeletion": true
+                    }
+                ]
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "db",
+                    "deployment": "db-1",
+                    "deploymentconfig": "db"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "db",
+                            "deployment": "db-1",
+                            "deploymentconfig": "db"
+                        },
+                        "annotations": {
+                            "openshift.io/deployment-config.latest-version": "1",
+                            "openshift.io/deployment-config.name": "db",
+                            "openshift.io/deployment.name": "db-1",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "db",
+                                "image": "docker-registry.default.svc:5000/barvyovy/db@sha256:4c8d8a64a1b1a00dbc3c9f4157681e6eb6a915c30eb0ab1d96988c209031db00",
+                                "ports": [
+                                    {
+                                        "containerPort": 3306,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {},
+                        "schedulerName": "default-scheduler"
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotaznik-1",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "dotaznik",
+                    "openshift.io/deployment-config.name": "dotaznik"
+                },
+                "annotations": {
+                    "kubectl.kubernetes.io/original-replicas": "1",
+                    "openshift.io/deployer-pod.name": "dotaznik-1-deploy",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "dotaznik",
+                    "openshift.io/deployment.phase": "Complete",
+                    "openshift.io/deployment.replicas": "1",
+                    "openshift.io/deployment.status-reason": "image change",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"dotaznik\",\"namespace\":\"barvyovy\",\"selfLink\":\"/apis/apps.openshift.io/v1/namespaces/barvyovy/deploymentconfigs/dotaznik\",\"uid\":\"f45e906f-46b6-11e8-ab4f-001a4a0a1e37\",\"resourceVersion\":\"3703259\",\"generation\":3,\"creationTimestamp\":\"2018-04-23T05:27:03Z\",\"labels\":{\"app\":\"dotaznik\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"strategy\":{\"type\":\"Rolling\",\"rollingParams\":{\"updatePeriodSeconds\":1,\"intervalSeconds\":1,\"timeoutSeconds\":600,\"maxUnavailable\":\"25%\",\"maxSurge\":\"25%\"},\"resources\":{},\"activeDeadlineSeconds\":21600},\"triggers\":[{\"type\":\"ConfigChange\"},{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"dotaznik\"],\"from\":{\"kind\":\"ImageStreamTag\",\"namespace\":\"barvyovy\",\"name\":\"dotaznik:latest\"},\"lastTriggeredImage\":\"docker-registry.default.svc:5000/barvyovy/dotaznik@sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f\"}}],\"replicas\":1,\"test\":false,\"selector\":{\"app\":\"dotaznik\",\"deploymentconfig\":\"dotaznik\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"app\":\"dotaznik\",\"deploymentconfig\":\"dotaznik\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"containers\":[{\"name\":\"dotaznik\",\"image\":\"docker-registry.default.svc:5000/barvyovy/dotaznik@sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f\",\"ports\":[{\"containerPort\":8080,\"protocol\":\"TCP\"}],\"resources\":{},\"terminationMessagePath\":\"/dev/termination-log\",\"terminationMessagePolicy\":\"File\",\"imagePullPolicy\":\"Always\"}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"securityContext\":{},\"schedulerName\":\"default-scheduler\"}}},\"status\":{\"latestVersion\":1,\"observedGeneration\":2,\"replicas\":0,\"updatedReplicas\":0,\"availableReplicas\":0,\"unavailableReplicas\":0,\"details\":{\"message\":\"image change\",\"causes\":[{\"type\":\"ImageChange\",\"imageTrigger\":{\"from\":{\"kind\":\"ImageStreamTag\",\"namespace\":\"barvyovy\",\"name\":\"dotaznik:latest\"}}}]},\"conditions\":[{\"type\":\"Available\",\"status\":\"False\",\"lastUpdateTime\":\"2018-04-23T05:27:03Z\",\"lastTransitionTime\":\"2018-04-23T05:27:03Z\",\"message\":\"Deployment config does not have minimum availability.\"}]}}\n"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps.openshift.io/v1",
+                        "kind": "DeploymentConfig",
+                        "name": "dotaznik",
+                        "uid": "f45e906f-46b6-11e8-ab4f-001a4a0a1e37",
+                        "controller": true,
+                        "blockOwnerDeletion": true
+                    }
+                ]
+            },
+            "spec": {
+                "replicas": 0,
+                "selector": {
+                    "app": "dotaznik",
+                    "deployment": "dotaznik-1",
+                    "deploymentconfig": "dotaznik"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "dotaznik",
+                            "deployment": "dotaznik-1",
+                            "deploymentconfig": "dotaznik"
+                        },
+                        "annotations": {
+                            "openshift.io/deployment-config.latest-version": "1",
+                            "openshift.io/deployment-config.name": "dotaznik",
+                            "openshift.io/deployment.name": "dotaznik-1",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "dotaznik",
+                                "image": "docker-registry.default.svc:5000/barvyovy/dotaznik@sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {},
+                        "schedulerName": "default-scheduler"
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotaznik-2",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "dotaznik",
+                    "openshift.io/deployment-config.name": "dotaznik"
+                },
+                "annotations": {
+                    "openshift.io/deployer-pod.name": "dotaznik-2-deploy",
+                    "openshift.io/deployment-config.latest-version": "2",
+                    "openshift.io/deployment-config.name": "dotaznik",
+                    "openshift.io/deployment.phase": "Complete",
+                    "openshift.io/deployment.replicas": "",
+                    "openshift.io/deployment.status-reason": "config change",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"dotaznik\",\"namespace\":\"barvyovy\",\"selfLink\":\"/apis/apps.openshift.io/v1/namespaces/barvyovy/deploymentconfigs/dotaznik\",\"uid\":\"f45e906f-46b6-11e8-ab4f-001a4a0a1e37\",\"resourceVersion\":\"3703479\",\"generation\":5,\"creationTimestamp\":\"2018-04-23T05:27:03Z\",\"labels\":{\"app\":\"dotaznik\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"strategy\":{\"type\":\"Rolling\",\"rollingParams\":{\"updatePeriodSeconds\":1,\"intervalSeconds\":1,\"timeoutSeconds\":600,\"maxUnavailable\":\"25%\",\"maxSurge\":\"25%\"},\"resources\":{},\"activeDeadlineSeconds\":21600},\"triggers\":[{\"type\":\"ConfigChange\"},{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"dotaznik\"],\"from\":{\"kind\":\"ImageStreamTag\",\"namespace\":\"barvyovy\",\"name\":\"dotaznik:latest\"},\"lastTriggeredImage\":\"docker-registry.default.svc:5000/barvyovy/dotaznik@sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f\"}}],\"replicas\":1,\"test\":false,\"selector\":{\"app\":\"dotaznik\",\"deploymentconfig\":\"dotaznik\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"app\":\"dotaznik\",\"deploymentconfig\":\"dotaznik\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"containers\":[{\"name\":\"dotaznik\",\"image\":\"docker-registry.default.svc:5000/barvyovy/dotaznik@sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f\",\"ports\":[{\"containerPort\":8080,\"protocol\":\"TCP\"}],\"resources\":{},\"terminationMessagePath\":\"/dev/termination-log\",\"terminationMessagePolicy\":\"File\",\"imagePullPolicy\":\"Always\"}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"serviceAccountName\":\"sa-apache\",\"serviceAccount\":\"sa-apache\",\"securityContext\":{},\"schedulerName\":\"default-scheduler\"}}},\"status\":{\"latestVersion\":2,\"observedGeneration\":4,\"replicas\":1,\"updatedReplicas\":1,\"availableReplicas\":0,\"unavailableReplicas\":1,\"details\":{\"message\":\"config change\",\"causes\":[{\"type\":\"ConfigChange\"}]},\"conditions\":[{\"type\":\"Progressing\",\"status\":\"True\",\"lastUpdateTime\":\"2018-04-23T05:29:32Z\",\"lastTransitionTime\":\"2018-04-23T05:29:23Z\",\"reason\":\"NewReplicationControllerAvailable\",\"message\":\"replication controller \\\"dotaznik-1\\\" successfully rolled out\"},{\"type\":\"Available\",\"status\":\"False\",\"lastUpdateTime\":\"2018-04-23T05:30:19Z\",\"lastTransitionTime\":\"2018-04-23T05:30:19Z\",\"message\":\"Deployment config does not have minimum availability.\"}]}}\n"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps.openshift.io/v1",
+                        "kind": "DeploymentConfig",
+                        "name": "dotaznik",
+                        "uid": "f45e906f-46b6-11e8-ab4f-001a4a0a1e37",
+                        "controller": true,
+                        "blockOwnerDeletion": true
+                    }
+                ]
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "dotaznik",
+                    "deployment": "dotaznik-2",
+                    "deploymentconfig": "dotaznik"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "dotaznik",
+                            "deployment": "dotaznik-2",
+                            "deploymentconfig": "dotaznik"
+                        },
+                        "annotations": {
+                            "openshift.io/deployment-config.latest-version": "2",
+                            "openshift.io/deployment-config.name": "dotaznik",
+                            "openshift.io/deployment.name": "dotaznik-2",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "dotaznik",
+                                "image": "docker-registry.default.svc:5000/barvyovy/dotaznik@sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "serviceAccountName": "sa-apache",
+                        "serviceAccount": "sa-apache",
+                        "securityContext": {},
+                        "schedulerName": "default-scheduler"
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "Route",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotaznik",
+                "creationTimestamp": null,
+                "annotations": {
+                    "openshift.io/host.generated": "true"
+                }
+            },
+            "spec": {
+                "host": "dotaznik-barvyovy.nocp.vs.csint.cz",
+                "path": "/",
+                "to": {
+                    "kind": "Service",
+                    "name": "dotaznik",
+                    "weight": 100
+                },
+                "port": {
+                    "targetPort": "8080-tcp"
+                },
+                "wildcardPolicy": "None"
+            },
+            "status": {
+                "ingress": [
+                    {
+                        "host": "dotaznik-barvyovy.nocp.vs.csint.cz",
+                        "routerName": "router",
+                        "conditions": [
+                            {
+                                "type": "Admitted",
+                                "status": "True",
+                                "lastTransitionTime": "2018-04-23T05:31:33Z"
+                            }
+                        ],
+                        "wildcardPolicy": "None"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "db",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "db"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "3306-tcp",
+                        "protocol": "TCP",
+                        "port": 3306,
+                        "targetPort": 3306
+                    }
+                ],
+                "selector": {
+                    "app": "db",
+                    "deploymentconfig": "db"
+                },
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotaznik",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "dotaznik"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "8080-tcp",
+                        "protocol": "TCP",
+                        "port": 8080,
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "app": "dotaznik",
+                    "deploymentconfig": "dotaznik"
+                },
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "generateName": "db-1-",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "db",
+                    "deployment": "db-1",
+                    "deploymentconfig": "db"
+                },
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"barvyovy\",\"name\":\"db-1\",\"uid\":\"c40d2153-46b6-11e8-95bc-001a4a0a1e38\",\"apiVersion\":\"v1\",\"resourceVersion\":\"3702968\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "db",
+                    "openshift.io/deployment.name": "db-1",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "restricted"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "kind": "ReplicationController",
+                        "name": "db-1",
+                        "uid": "c40d2153-46b6-11e8-95bc-001a4a0a1e38",
+                        "controller": true,
+                        "blockOwnerDeletion": true
+                    }
+                ]
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "default-token-b6xf2",
+                        "secret": {
+                            "secretName": "default-token-b6xf2",
+                            "defaultMode": 420
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "db",
+                        "image": "docker-registry.default.svc:5000/barvyovy/db@sha256:4c8d8a64a1b1a00dbc3c9f4157681e6eb6a915c30eb0ab1d96988c209031db00",
+                        "ports": [
+                            {
+                                "containerPort": 3306,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "default-token-b6xf2",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "Always",
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SETGID",
+                                    "SETUID",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "seLinuxOptions": {
+                                "level": "s0:c20,c0"
+                            },
+                            "runAsUser": 1000380000
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "serviceAccountName": "default",
+                "serviceAccount": "default",
+                "nodeName": "xn-i2.vs.csint.cz",
+                "securityContext": {
+                    "seLinuxOptions": {
+                        "level": "s0:c20,c0"
+                    },
+                    "fsGroup": 1000380000
+                },
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-r5kds"
+                    }
+                ],
+                "schedulerName": "default-scheduler"
+            },
+            "status": {
+                "phase": "Pending",
+                "qosClass": "BestEffort"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "db-1-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "db-1"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "db-1",
+                    "openshift.io/scc": "privileged"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "build.openshift.io/v1",
+                        "kind": "Build",
+                        "name": "db-1",
+                        "uid": "b21e132f-46b6-11e8-95bc-001a4a0a1e38",
+                        "controller": true
+                    }
+                ]
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-rxxhp-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-rxxhp",
+                            "defaultMode": 420
+                        }
+                    },
+                    {
+                        "name": "builder-token-gg287",
+                        "secret": {
+                            "secretName": "builder-token-gg287",
+                            "defaultMode": 420
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "docker-build",
+                        "image": "docker-registry-default.rocp.vs.csint.cz/openshift3/ose-docker-builder:v3.6.173.0.96",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"db-1\",\"namespace\":\"barvyovy\",\"selfLink\":\"/apis/build.openshift.io/v1/namespaces/barvyovy/builds/db-1\",\"uid\":\"b21e132f-46b6-11e8-95bc-001a4a0a1e38\",\"resourceVersion\":\"3702886\",\"creationTimestamp\":\"2018-04-23T05:25:12Z\",\"labels\":{\"app\":\"db\",\"buildconfig\":\"db\",\"openshift.io/build-config.name\":\"db\",\"openshift.io/build.start-policy\":\"Serial\"},\"annotations\":{\"openshift.io/build-config.name\":\"db\",\"openshift.io/build.number\":\"1\"},\"ownerReferences\":[{\"apiVersion\":\"build.openshift.io/v1\",\"kind\":\"BuildConfig\",\"name\":\"db\",\"uid\":\"b1ac1431-46b6-11e8-ab4f-001a4a0a1e37\",\"controller\":true}]},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/mipam007/dotaznik-db.git\"}},\"strategy\":{\"type\":\"Docker\",\"dockerStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"docker-registry-default.rocp.vs.csint.cz/rhscl/centos@sha256:8c7ac054adab3692f7026d49fd1c4df69aa6a138b2f076b432d2ac0164c022d3\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"docker-registry.default.svc:5000/barvyovy/db:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-rxxhp\"}},\"resources\":{},\"postCommit\":{},\"nodeSelector\":null,\"triggeredBy\":[{\"message\":\"Build configuration change\"}]},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"docker-registry.default.svc:5000/barvyovy/db:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"barvyovy\",\"name\":\"db\"},\"output\":{}}}\n"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/mipam007/dotaznik-db.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/mipam007/dotaznik-db.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v3.6.173.0.96"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-rxxhp-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-gg287",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "FallbackToLogsOnError",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "xn-i2.vs.csint.cz",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-rxxhp"
+                    }
+                ],
+                "schedulerName": "default-scheduler"
+            },
+            "status": {
+                "phase": "Pending",
+                "qosClass": "BestEffort"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotaznik-1-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "dotaznik-1"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "dotaznik-1",
+                    "openshift.io/scc": "privileged"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "build.openshift.io/v1",
+                        "kind": "Build",
+                        "name": "dotaznik-1",
+                        "uid": "f47aaff3-46b6-11e8-95bc-001a4a0a1e38",
+                        "controller": true
+                    }
+                ]
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-rxxhp-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-rxxhp",
+                            "defaultMode": 420
+                        }
+                    },
+                    {
+                        "name": "builder-token-gg287",
+                        "secret": {
+                            "secretName": "builder-token-gg287",
+                            "defaultMode": 420
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "docker-build",
+                        "image": "docker-registry-default.rocp.vs.csint.cz/openshift3/ose-docker-builder:v3.6.173.0.96",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"dotaznik-1\",\"namespace\":\"barvyovy\",\"selfLink\":\"/apis/build.openshift.io/v1/namespaces/barvyovy/builds/dotaznik-1\",\"uid\":\"f47aaff3-46b6-11e8-95bc-001a4a0a1e38\",\"resourceVersion\":\"3703086\",\"creationTimestamp\":\"2018-04-23T05:27:03Z\",\"labels\":{\"app\":\"dotaznik\",\"buildconfig\":\"dotaznik\",\"openshift.io/build-config.name\":\"dotaznik\",\"openshift.io/build.start-policy\":\"Serial\"},\"annotations\":{\"openshift.io/build-config.name\":\"dotaznik\",\"openshift.io/build.number\":\"1\"},\"ownerReferences\":[{\"apiVersion\":\"build.openshift.io/v1\",\"kind\":\"BuildConfig\",\"name\":\"dotaznik\",\"uid\":\"f45b8357-46b6-11e8-ab4f-001a4a0a1e37\",\"controller\":true}]},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/mipam007/dotaznik-app.git\"}},\"strategy\":{\"type\":\"Docker\",\"dockerStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"docker-registry-default.rocp.vs.csint.cz/rhscl/centos@sha256:8c7ac054adab3692f7026d49fd1c4df69aa6a138b2f076b432d2ac0164c022d3\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"docker-registry.default.svc:5000/barvyovy/dotaznik:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-rxxhp\"}},\"resources\":{},\"postCommit\":{},\"nodeSelector\":null,\"triggeredBy\":[{\"message\":\"Build configuration change\"}]},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"docker-registry.default.svc:5000/barvyovy/dotaznik:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"barvyovy\",\"name\":\"dotaznik\"},\"output\":{}}}\n"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/mipam007/dotaznik-app.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/mipam007/dotaznik-app.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v3.6.173.0.96"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-rxxhp-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-gg287",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "FallbackToLogsOnError",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "xn-i1.vs.csint.cz",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-rxxhp"
+                    }
+                ],
+                "schedulerName": "default-scheduler"
+            },
+            "status": {
+                "phase": "Pending",
+                "qosClass": "BestEffort"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "generateName": "dotaznik-2-",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "dotaznik",
+                    "deployment": "dotaznik-2",
+                    "deploymentconfig": "dotaznik"
+                },
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"barvyovy\",\"name\":\"dotaznik-2\",\"uid\":\"80e0645c-46b7-11e8-95bc-001a4a0a1e38\",\"apiVersion\":\"v1\",\"resourceVersion\":\"3703518\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "2",
+                    "openshift.io/deployment-config.name": "dotaznik",
+                    "openshift.io/deployment.name": "dotaznik-2",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "anyuid"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "kind": "ReplicationController",
+                        "name": "dotaznik-2",
+                        "uid": "80e0645c-46b7-11e8-95bc-001a4a0a1e38",
+                        "controller": true,
+                        "blockOwnerDeletion": true
+                    }
+                ]
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "sa-apache-token-zpf48",
+                        "secret": {
+                            "secretName": "sa-apache-token-zpf48",
+                            "defaultMode": 420
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "dotaznik",
+                        "image": "docker-registry.default.svc:5000/barvyovy/dotaznik@sha256:24e33bd72b2f12d251011a073fb4be90d3461354ac7b20247f47fc0669f71a9f",
+                        "ports": [
+                            {
+                                "containerPort": 8080,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "sa-apache-token-zpf48",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "Always",
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "MKNOD",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "seLinuxOptions": {
+                                "level": "s0:c20,c0"
+                            }
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "serviceAccountName": "sa-apache",
+                "serviceAccount": "sa-apache",
+                "nodeName": "xn-i2.vs.csint.cz",
+                "securityContext": {
+                    "seLinuxOptions": {
+                        "level": "s0:c20,c0"
+                    }
+                },
+                "imagePullSecrets": [
+                    {
+                        "name": "sa-apache-dockercfg-6597m"
+                    }
+                ],
+                "schedulerName": "default-scheduler"
+            },
+            "status": {
+                "phase": "Pending",
+                "qosClass": "BestEffort"
+            }
+        }
+    ]
+}
