@@ -95,12 +95,7 @@
 							"automatic": true,
 							"containerNames": [
 								"dotaznik"
-							],
-							"from": {
-				                                "kind": "ImageStreamTag",
-				                                "namespace": "barvyovy",
-				                                "name": "dotaznik:latest"
-							}
+							]
 						}
 					}
 				],
