@@ -29,6 +29,18 @@
 			"metadata": {
 				        "name": "anyuid"
 			},
+			"seLinuxContext": {
+			    "type": "MustRunAs"
+			},
+			"runAsUser": {
+			    "type": "RunAsAny"
+			},
+			"supplementalGroups": {
+			    "type": "RunAsAny"
+			},
+			"fsGroup": {
+			    "type": "RunAsAny"
+			},
 			"users": [
 				"system:serviceaccount:barvyovy:sa-apache"
 			]
