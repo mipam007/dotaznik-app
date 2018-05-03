@@ -2,7 +2,7 @@
 	"apiVersion": "v1",
 	"kind": "Template",
 	"metadata": {
-		"description": "pojďme se najest",
+		"description": "2x POD: HTTPd + MariaDB, postaveno nad centos7",
 		"name": "dotaznik"
 	},
 	"objects": [
@@ -10,7 +10,11 @@
 			"apiVersion": "v1",
 			"kind": "ServiceAccount",
 			"metadata": {
-				"name": "anyuid-sapache"
+				"labels": {
+					"template": "dotaznik"
+				},
+				"name": "sa-apache",
+				"namespace": "barvyovy"
 			}
 		},
 		{
@@ -18,18 +22,16 @@
 			"apiVersion": "v1",
 			"metadata": {
 				"annotations": {
-				"kubernetes.io/description": "anyuid provides all features of the restricted SCC but allows users to run with any UID and any GID."
+				"kubernetes.io/description": "anyuid pro sa-apache"
 				},
-			        "name": "anyuid-sapache"
+			        "name": "anyuid-sa-apache"
 			},
 			"priority": 10,
 			"allowPrivilegedContainer": false,
-			"defaultAddCapabilities": [],
 			"requiredDropCapabilities": [
 				"MKNOD",
 				"SYS_CHROOT"
 			],
-			"allowedCapabilities": [],
 			"allowHostDirVolumePlugin": false,
 			"volumes": [
 				"configMap",
@@ -52,12 +54,9 @@
 			"supplementalGroups": {
 				"type": "RunAsAny"
 			},
-			"fsGroup": {
-				"type": "RunAsAny"
-			},
 			"readOnlyRootFilesystem": false,
 			"users": [
-				"system:serviceaccount:barvyovy:anyuid-sapache"
+				"system:serviceaccount:barvyovy:sa-sapache"
 			]
 		},
 		{
@@ -65,9 +64,9 @@
 			"kind": "DeploymentConfig",
 			"metadata": {
 				"name": "dotaznik",
-					"labels": {
+				"labels": {
 					"app": "dotaznik"
-					},
+				},
 				"annotations": {
 					"openshift.io/generated-by": "OpenShiftNewApp"
 				}

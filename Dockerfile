@@ -1,13 +1,4 @@
-FROM docker-registry-default.rocp.vs.csint.cz/rhscl/centos
-#FROM centos
-
-## OpenShift hack ##
-# oc create serviceaccount sa-apache
-# oc edit scc anyuid
-# - system:serviceaccount:<project_name>:sa-apache
-# oc edit dc/<dc_name>
-# serviceAccount: sa-apache
-# serviceAccountName: sa-apache
+FROM centos
 
 LABEL Maintainer="Jindřich Káňa <jindrich.kana@gmail.com>"
 LABEL Vendor="ELOS Technologies, s.r.o."
@@ -56,5 +47,4 @@ EXPOSE 8080
 
 USER apache
 
-ENTRYPOINT ["/usr/sbin/httpd"]
-CMD ["-D", "FOREGROUND"]
+ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"]
