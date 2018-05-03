@@ -38,6 +38,7 @@ RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && sed -i '/\<IfModule\ mime\_module\>/a AddType\ application\/x\-httpd\-php\ \.php' /etc/httpd/conf/httpd.conf \
     && sed -i '/\#ServerName\ www\.example\.com\:8080/a ServerName\ \$\{SERVER_NAME\}' /etc/httpd/conf/httpd.conf \
     && sed -i '/\;error_log\ \=\ php_errors\.log/a error_log\ \=\ \/var\/log\/httpd\/error_log' /etc/php.ini \
+    && sed -i '/\;\ log_errors/a log_errors\ On' /etc/php.ini \
     && echo 'extension=mysqli.so' >> /etc/php.ini \
     && rm -rf /etc/httpd/conf.d/* \
     && chown -R apache: /var/log/httpd /run/httpd \
