@@ -145,16 +145,16 @@
 				}
 			}
 		},
-		                {
-                        "apiVersion": "v1",
-                        "kind": "ImageStream",
-                        "metadata": {
-                                "annotations": {
-                                "description": "sleduje změny v aplikačním obraze"
-                                },
-                                "name": "dotaznik"
-                        }
-                },
+		{
+			"apiVersion": "v1",
+      "kind": "ImageStream",
+      "metadata": {
+        "annotations": {
+        "description": "sleduje změny v aplikačním obraze"
+        },
+        "name": "dotaznik"
+      }
+    },
 		{
 			"apiVersion": "v1",
 			"kind": "Service",
@@ -202,30 +202,22 @@
 			"kind": "Service",
 			"metadata": {
 				"annotations": {
-					"template.openshift.io/expose-uri": "mongodb://{.spec.clusterIP}:{.spec.ports[?(.name==\"mongo\")].port}"
+					"template.openshift.io/expose-uri": "mysql://{.spec.clusterIP}:{.spec.ports[?(.name==\"mariadb\")].port}"
 				},
 				"name": "${DATABASE_SERVICE_NAME}"
 			},
 			"spec": {
 				"ports": [
 					{
-						"name": "mongo",
-						"nodePort": 0,
-						"port": 27017,
-						"protocol": "TCP",
-						"targetPort": 27017
+						"name": "mariadb",
+						"port": 3306
 					}
 				],
 				"selector": {
 					"name": "${DATABASE_SERVICE_NAME}"
-				},
-				"sessionAffinity": "None",
-				"type": "ClusterIP"
-			},
-			"status": {
-				"loadBalancer": {}
-			}
-		},
+				}
+		  },
+	  },
 		{
 			"apiVersion": "v1",
 			"kind": "DeploymentConfig",
@@ -262,11 +254,11 @@
 									}
 								],
 							"failurePolicy": "ignore"
-						}
-					},
+							}
+						},
 						"timeoutSeconds": 600,
-					"updatePeriodSeconds": 1
-			},
+						"updatePeriodSeconds": 1
+					},
 				"template": {
 					"metadata": {
 					"labels": {
@@ -383,10 +375,11 @@
 						"type": "ConfigChange"
 					}
 				]
+				},
+			"status": {}
 			}
 		}
 	],
-
     "parameters": [
         {
             "description": "Název všech frontendových objektů definovaných v template",
