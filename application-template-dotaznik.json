@@ -209,7 +209,7 @@
 			"spec": {
 				"ports": [
 					{
-						"name": "db",
+						"name": "mariadb",
 						"port": 3306
 					}
 				],
