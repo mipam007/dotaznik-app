@@ -216,7 +216,7 @@
 				"selector": {
 					"name": "${DATABASE_SERVICE_NAME}"
 				}
-		  },
+		  }
 	  },
 		{
 			"apiVersion": "v1",
