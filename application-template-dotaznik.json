@@ -14,7 +14,7 @@
 					"template": "dotaznik"
 				},
 				"name": "sa-apache",
-				"namespace": "barvyovy"
+				"namespace": "${NAMESPACE}"
 			}
 		},
 		{
@@ -424,7 +424,7 @@
             "displayName": "Database Service Name",
             "name": "DATABASE_SERVICE_NAME",
             "required": true,
-            "value": "mariadb"
+            "value": ""
         },
         {
             "description": "Username for MariaDB user that will be used for accessing the database.",
@@ -455,7 +455,7 @@
             "displayName": "MariaDB Database Name",
             "name": "MYSQL_DATABASE",
             "required": true,
-            "value": "sampledb"
+            "value": ""
         }
 
     ]
