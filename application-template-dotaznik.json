@@ -261,10 +261,10 @@
 					},
 				"template": {
 					"metadata": {
-					"labels": {
-						"name": "${DATABASE_SERVICE_NAME}"
-					}
-				},
+					  "labels": {
+						  "name": "${DATABASE_SERVICE_NAME}"
+					  }
+				  },
 					"spec": {
 						"containers": [
 							{
