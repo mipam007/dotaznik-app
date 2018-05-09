@@ -325,7 +325,7 @@
 										"command": [
 											"/bin/sh",
 											"-c",
-											"mysql -h $DATABASE_SERVICE_NAME -u $MYSQL_USER -p $MYSQL_PASSWORD -D $MYSQL_DATABASE -e 'SELECT 1'"
+											"/opt/rh/rh-mariadb101/root/usr/bin/mysql -h $DATABASE_SERVICE_NAME -u $MYSQL_USER -p $MYSQL_PASSWORD -D $MYSQL_DATABASE -e 'SELECT 1'"
 										]
 									},
 									"initialDelaySeconds": 5,
