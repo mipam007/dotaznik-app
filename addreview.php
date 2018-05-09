@@ -1,10 +1,9 @@
 <?php
 
-$hostname = "db";
-$username = "hodnoceni";
-$password = "hodnoceni";
-$db = "reviews";
-
+$hostname = "DATABASE_SERVICE_NAME";
+$username = "MYSQL_USER";
+$password = "MYSQL_PASSWORD";
+$db = "MYSQL_DATABASE";
 
 $dbconnect= new mysqli($hostname,$username,$password,$db);
 
