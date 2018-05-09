@@ -429,24 +429,18 @@
         {
             "description": "Username for MariaDB user that will be used for accessing the database.",
             "displayName": "MariaDB Connection Username",
-            "from": "user[A-Z0-9]{8}",
-            "generate": "expression",
             "name": "MYSQL_USER",
             "required": true
         },
         {
             "description": "Password for the MariaDB connection user.",
             "displayName": "MariaDB Connection Password",
-            "from": "[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{20}",
-            "generate": "expression",
             "name": "MYSQL_PASSWORD",
             "required": true
         },
 				{
             "description": "Password for the MariaDB root user.",
             "displayName": "MariaDB root Password",
-            "from": "[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{20}",
-            "generate": "expression",
             "name": "MYSQL_ROOT_PASSWORD",
             "required": true
         },
