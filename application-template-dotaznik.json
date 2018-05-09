@@ -76,15 +76,13 @@
 				"annotations": {
 					"description": "vystavenení aplikace a její vyvažování"
 					},
-					"name": "${NAME}",
-					"labels": "dotaznik-app"
+					"name": "${NAME}"
 				},
 			"spec": {
 				"ports": [
 					{
 						"name": "dotaznik",
 						"port": 80,
-						"protocol": "TCP",
 						"targetPort": 8080
 					}
 				],
