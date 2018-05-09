@@ -325,7 +325,7 @@
 										"command": [
 											"/bin/sh",
 											"-c",
-											"MYSQL_PWD=\"$MYSQL_PASSWORD\" mysql -h $DATABASE_SERVICE_NAME -u $MYSQL_USER -D $MYSQL_DATABASE -e 'SELECT 1'"
+											"mysql -h $DATABASE_SERVICE_NAME -u $MYSQL_USER -p $MYSQL_PASSWORD -D $MYSQL_DATABASE -e 'SELECT 1'"
 										]
 									},
 									"initialDelaySeconds": 5,
