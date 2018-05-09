@@ -61,78 +61,6 @@
 		},
 		{
 			"apiVersion": "v1",
-			"kind": "DeploymentConfig",
-			"metadata": {
-				"name": "dotaznik",
-				"labels": {
-					"app": "dotaznik"
-				},
-				"annotations": {
-					"openshift.io/generated-by": "OpenShiftNewApp"
-				}
-			},
-			"spec": {
-				"strategy": {
-					"type": "Rolling",
-					"rollingParams": {
-				       		"updatePeriodSeconds": 1,
-				                "intervalSeconds": 1,
-				                "timeoutSeconds": 600,
-				                "maxUnavailable": "25%",
-				                "maxSurge": "25%"
-					},
-					"resources": {},
-					"activeDeadlineSeconds": 21600
-				},
-				"triggers": [
-					{
-						"type": "ConfigChange"
-					}
-				],
-				"replicas": 1,
-		                "test": false,
-		                "selector": {
-		                    "app": "dotaznik",
-		                    "deploymentconfig": "dotaznik"
-				},
-				"template": {
-					"metadata": {
-						"creationTimestamp": null,
-						"labels": {
-			                            "app": "dotaznik",
-			                            "deploymentconfig": "dotaznik"
-						}
-					},
-					"spec": {
-						"containers": [
-							{
-				                                "name": "dotaznik",
-                                                                "image": "barvyovy/dotaznik:latest",
-				                                "ports": [
-									{
-					                                        "containerPort": 8080,
-					                                        "protocol": "TCP"
-									}
-								],
-				                                "resources": {},
-				                                "terminationMessagePath": "/dev/termination-log",
-				                                "terminationMessagePolicy": "File",
-				                                "imagePullPolicy": "Always"
-							}
-						],
-			                        "restartPolicy": "Always",
-			                        "terminationGracePeriodSeconds": 30,
-			                        "dnsPolicy": "ClusterFirst",
-			                        "serviceAccountName": "sa-apache",
-			                        "serviceAccount": "sa-apache",
-			                        "securityContext": {},
-			                        "schedulerName": "default-scheduler"
-					}
-				}
-			}
-		},
-		{
-			"apiVersion": "v1",
 			"kind": "Route",
 			"metadata": {
 				"name": "${NAME}"
@@ -162,7 +90,7 @@
 				"annotations": {
 					"description": "vystavenení aplikace a její vyvažování"
 					},
-					"name": "dotaznik"
+					"name": "${NAME}"
 				},
 			"spec": {
 				"ports": [
@@ -174,7 +102,79 @@
 					}
 				],
 				"selector": {
-					"name": "dotaznik"
+					"name": "${NAME}"
+				}
+			}
+		},
+		{
+			"apiVersion": "v1",
+			"kind": "DeploymentConfig",
+			"metadata": {
+				"name": "dotaznik",
+				"labels": {
+					"app": "dotaznik"
+				},
+				"annotations": {
+					"openshift.io/generated-by": "OpenShiftNewApp"
+				}
+			},
+			"spec": {
+				"strategy": {
+					"type": "Rolling",
+					"rollingParams": {
+									"updatePeriodSeconds": 1,
+												"intervalSeconds": 1,
+												"timeoutSeconds": 600,
+												"maxUnavailable": "25%",
+												"maxSurge": "25%"
+					},
+					"resources": {},
+					"activeDeadlineSeconds": 21600
+				},
+				"triggers": [
+					{
+						"type": "ConfigChange"
+					}
+				],
+				"replicas": 1,
+										"test": false,
+										"selector": {
+												"app": "dotaznik",
+												"deploymentconfig": "dotaznik"
+				},
+				"template": {
+					"metadata": {
+						"creationTimestamp": null,
+						"labels": {
+																	"app": "dotaznik",
+																	"deploymentconfig": "dotaznik"
+						}
+					},
+					"spec": {
+						"containers": [
+							{
+																				"name": "dotaznik",
+																																"image": "barvyovy/dotaznik:latest",
+																				"ports": [
+									{
+																									"containerPort": 8080,
+																									"protocol": "TCP"
+									}
+								],
+																				"resources": {},
+																				"terminationMessagePath": "/dev/termination-log",
+																				"terminationMessagePolicy": "File",
+																				"imagePullPolicy": "Always"
+							}
+						],
+															"restartPolicy": "Always",
+															"terminationGracePeriodSeconds": 30,
+															"dnsPolicy": "ClusterFirst",
+															"serviceAccountName": "sa-apache",
+															"serviceAccount": "sa-apache",
+															"securityContext": {},
+															"schedulerName": "default-scheduler"
+					}
 				}
 			}
 		},
