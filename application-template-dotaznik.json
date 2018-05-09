@@ -243,7 +243,7 @@
 								"command": [
 									"/bin/sh",
 									"-c",
-									"hostname && sleep 10 && echo $QUERY | /opt/rh/rh-mysql56/root/usr/bin/mysql -h $MYSQL_SERVICE_HOST -u $MYSQL_USER -D $MYSQL_DATABASE -p$MYSQL_PASSWORD -P 3306"
+									"hostname && sleep 10 && echo $QUERY | MYSQL_PWD='${MYSQL_PASSWORD}' /opt/rh/rh-mysql56/root/usr/bin/mysql -h $MYSQL_SERVICE_HOST -u $MYSQL_USER -D $MYSQL_DATABASE -P 3306"
 								],
 								"env": [
 									{
@@ -325,7 +325,7 @@
 										"command": [
 											"/bin/sh",
 											"-c",
-											"/opt/rh/rh-mariadb101/root/usr/bin/mysql -h $DATABASE_SERVICE_NAME -u $MYSQL_USER -p $MYSQL_PASSWORD -D $MYSQL_DATABASE -e 'SELECT 1'"
+											"MYSQL_PWD='${MYSQL_PASSWORD}' /opt/rh/rh-mariadb101/root/usr/bin/mysql -h $DATABASE_SERVICE_NAME -u $MYSQL_USER -D $MYSQL_DATABASE -e 'SELECT 1'"
 										]
 									},
 									"initialDelaySeconds": 5,
