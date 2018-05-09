@@ -67,6 +67,7 @@
 			},
 			"spec": {
 				"host": "${APPLICATION_DOMAIN}",
+				"path": "/",
 				"to": {
 					"kind": "Service",
 					"name": "${NAME}"
@@ -96,7 +97,7 @@
 			"spec": {
 				"ports": [
 					{
-						"name": "${NAME}",
+						"name": "dotaznik",
 						"port": 80,
 						"protocol": "TCP",
 						"targetPort": 8080
