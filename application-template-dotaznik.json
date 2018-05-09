@@ -56,7 +56,7 @@
 			},
 			"readOnlyRootFilesystem": false,
 			"users": [
-				"system:serviceaccount:barvyovy:sa-sapache"
+				"system:serviceaccount:barvyovy:sa-apache"
 			]
 		},
 		{
@@ -123,8 +123,8 @@
 			                        "restartPolicy": "Always",
 			                        "terminationGracePeriodSeconds": 30,
 			                        "dnsPolicy": "ClusterFirst",
-			                        "serviceAccountName": "anyuid-sapache",
-			                        "serviceAccount": "anyuid-sapache",
+			                        "serviceAccountName": "sa-apache",
+			                        "serviceAccount": "sa-apache",
 			                        "securityContext": {},
 			                        "schedulerName": "default-scheduler"
 					}
