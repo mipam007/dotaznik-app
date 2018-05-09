@@ -183,18 +183,18 @@
 			"kind": "Secret",
 			"metadata": {
 				"annotations": {
-					"template.openshift.io/expose-admin_password": "{.data['database-admin-password']}",
 					"template.openshift.io/expose-database_name": "{.data['database-name']}",
 					"template.openshift.io/expose-password": "{.data['database-password']}",
+					"template.openshift.io/expose-root_password": "{.data[database-root-password]}",
 					"template.openshift.io/expose-username": "{.data['database-user']}"
 				},
 				"name": "${DATABASE_SERVICE_NAME}"
 			},
 			"stringData": {
-				"database-admin-password": "${MONGODB_ADMIN_PASSWORD}",
-				"database-name": "${MONGODB_DATABASE}",
-				"database-password": "${MONGODB_PASSWORD}",
-				"database-user": "${MONGODB_USER}"
+				"database-name": "${MYSQL_DATABASE}",
+				"database-password": "${MYSQL_PASSWORD}",
+				"database-root-password": "${DATABASE_ROOT_PASSWORD}",
+				"database-user": "${MYSQL_USER}"
 			}
 		},
 		{
