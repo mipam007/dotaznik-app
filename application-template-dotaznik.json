@@ -90,7 +90,8 @@
 				"annotations": {
 					"description": "vystavenení aplikace a její vyvažování"
 					},
-					"name": "${NAME}"
+					"name": "${NAME}",
+					"labels": "dotaznik-app"
 				},
 			"spec": {
 				"ports": [
@@ -102,7 +103,7 @@
 					}
 				],
 				"selector": {
-					"name": "${NAME}"
+					"name": "dotaznik-app"
 				}
 			}
 		},
@@ -112,7 +113,7 @@
 			"metadata": {
 				"name": "dotaznik",
 				"labels": {
-					"app": "dotaznik"
+					"app": "dotaznik-app"
 				},
 				"annotations": {
 					"openshift.io/generated-by": "OpenShiftNewApp"
@@ -146,7 +147,7 @@
 					"metadata": {
 						"creationTimestamp": null,
 						"labels": {
-																	"app": "dotaznik",
+																	"app": "dotaznik-app",
 																	"deploymentconfig": "dotaznik"
 						}
 					},
