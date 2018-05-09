@@ -140,7 +140,7 @@
 				"replicas": 1,
 										"test": false,
 										"selector": {
-												"app": "dotaznik",
+												"app": "dotaznik-app",
 												"deploymentconfig": "dotaznik"
 				},
 				"template": {
