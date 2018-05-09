@@ -14,7 +14,7 @@
 					"template": "dotaznik"
 				},
 				"name": "sa-apache",
-				"namespace": "${NAMESPACE}"
+				"namespace": "barvyovy"
 			}
 		},
 		{
@@ -258,7 +258,8 @@
 						},
 						"timeoutSeconds": 600,
 						"updatePeriodSeconds": 1
-					},
+					}
+				},
 				"template": {
 					"metadata": {
 					  "labels": {
@@ -378,7 +379,6 @@
 				},
 			"status": {}
 			}
-		}
 	],
     "parameters": [
         {
