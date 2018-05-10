@@ -232,19 +232,13 @@
 					"name": "${DATABASE_SERVICE_NAME}"
 				},
 				"strategy": {
-					"type": "Recreate",
+					"type": "Rolling",
 					"resources": {},
 					"rollingParams": {
-						"intervalSeconds": 1,
-						"maxSurge": "25%",
-						"maxUnavailable": "25%",
 						"post": {
 							"execNewPod": {
-								"command": [
-									"/bin/sh",
-									"-c",
-									"hostname && sleep 10 && echo $QUERY | MYSQL_PWD='${MYSQL_PASSWORD}' /opt/rh/rh-mysql56/root/usr/bin/mysql -h $MYSQL_SERVICE_HOST -u $MYSQL_USER -D $MYSQL_DATABASE -P 3306"
-								],
+								"containerName": "${DATABASE_SERVICE_NAME}",
+								"command": [ "/bin/sh", "-c", "hostname && sleep 10 && echo $QUERY | MYSQL_PWD='${MYSQL_PASSWORD}' /opt/rh/rh-mysql56/root/usr/bin/mysql -h $MYSQL_SERVICE_HOST -u $MYSQL_USER -D $MYSQL_DATABASE -P 3306" ],
 								"env": [
 									{
 										"name": "QUERY",
