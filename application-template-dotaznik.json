@@ -325,7 +325,7 @@
 										"command": [
 											"/bin/sh",
 											"-c",
-											"MYSQL_PWD='${MYSQL_PASSWORD}' /opt/rh/rh-mariadb101/root/usr/bin/mysql -h $DATABASE_SERVICE_NAME -u $MYSQL_USER -D $MYSQL_DATABASE -e 'SELECT 1'"
+											"MYSQL_PWD='${MYSQL_PASSWORD}' /opt/rh/rh-mariadb101/root/usr/bin/mysql -h 127.0.0.1 -u $MYSQL_USER -D $MYSQL_DATABASE -e 'SELECT 1'"
 										]
 									},
 									"initialDelaySeconds": 5,
