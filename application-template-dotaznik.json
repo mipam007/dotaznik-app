@@ -247,11 +247,11 @@
 						"imageChangeParams": {
 							"automatic": true,
 							"containerNames": [
-								"mariadb"
+								"${DATABASE_SERVICE_NAME}"
 							],
 							"from": {
 								"kind": "ImageStreamTag",
-								"name": "mariadb:10.1",
+								"name": "maruska:latest",
 								"namespace": "${NAMESPACE}"
 							}
 						}

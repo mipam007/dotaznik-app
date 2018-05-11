@@ -2,10 +2,12 @@
 <html>
   <body>
 
+  <p> <?php $_SERVER['HTTP_HOST']; ?> </p>
+
   <p>Zadejte své hodnocení</p>
 
   <form action="./addreview.php" method="POST">
-
+  
       Jméno: <input type="text" name="reviewer_name"><br><br>
 
       Kolik dostaneme hvězdiček?? 
@@ -23,10 +25,5 @@
       <input type="submit" value="Submit" name="odeslat">
 
   </form>
-
-<?php
-echo $_SERVER['SERVER_NAME'];
-?>
-
 </body>
 </html>
