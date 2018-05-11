@@ -241,6 +241,25 @@
 						"updatePeriodSeconds": 1
 					}
 				},
+				"triggers": [
+					{
+						"type": "ImageChange",
+						"imageChangeParams": {
+							"automatic": true,
+							"containerNames": [
+								"mariadb"
+							],
+							"from": {
+								"kind": "ImageStreamTag",
+								"name": "mariadb:10.1",
+								"namespace": "${NAMESPACE}"
+							}
+						}
+					},
+					{
+						"type": "ConfigChange"
+					}
+				],
 				"template": {
 					"metadata": {
 					  "labels": {
@@ -338,28 +357,7 @@
 								"name": "${DATABASE_SERVICE_NAME}-data"
 							}
 						]
-					},
-				  "triggers": [
-					  {
-						  "imageChangeParams": {
-							  "automatic": true,
-							  "containerNames": [
-								  "mariadb"
-					],
-							"from": {
-								"kind": "ImageStreamTag",
-								"name": "mariadb:10.1",
-								"namespace": "${NAMESPACE}"
-							},
-							"type": "ImageChange" {
-							},
-							"type": "ConfigChange" {
-							}
-						  }
-					  }
-				]
-			"status": {
-			}
+					}
 		    ]
 	    }
 }
