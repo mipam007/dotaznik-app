@@ -45,7 +45,7 @@ RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && ln -sf /dev/stdout /var/log/httpd/access_log \
     && ln -sf /dev/stderr /var/log/httpd/error_log 
 
-EXPOSE 8080
+EXPOSE 80
 
 USER apache
 
