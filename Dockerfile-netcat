@@ -1,0 +1,9 @@
+FROM docker.io/centos
+
+RUN yum install -y --setopt=tsflags=nodocs nmap-ncat.x86_64 \
+    && yum clean all
+
+EXPOSE 8081
+
+ENTRYPOINT ["nc", "-l", "8081", "--keep-open"]
+
