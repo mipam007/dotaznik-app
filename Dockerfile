@@ -1,6 +1,6 @@
 FROM centos
 
-LABEL Maintainer="Jindřich Káňa <jindrich.kana@gmail.com>"
+LABEL Maintainer="Jindřich Káňa <jindrich.kana@elostech.cz>"
 LABEL Vendor="ELOS Technologies, s.r.o."
 
 RUN     yum -y --setopt=tsflags=nodocs update \
@@ -10,7 +10,6 @@ RUN     yum -y --setopt=tsflags=nodocs update \
         gcc-c++ \
         httpd \
         mod_ssl \
-	mariadb \
         php \
         php-cli \
         php-devel \
