@@ -41,6 +41,8 @@ RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && echo 'extension=mysqli.so' >> /etc/php.ini \
     && rm -rf /etc/httpd/conf.d/* \
     && rm -rf /run/httpd/httpd.pid \
+    && touch /run/httpd/httpd.pid \
+    && chown apache: /run/httpd/httpd.pid \
     && ln -sf /dev/stdout /var/log/httpd/access_log \
     && ln -sf /dev/stderr /var/log/httpd/error_log 
 
