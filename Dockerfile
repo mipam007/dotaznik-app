@@ -40,6 +40,7 @@ RUN find /var/www/html/ -type d -exec chmod 755 {} \; \
     && sed -i '/\;\ log_errors/a log_errors\ On' /etc/php.ini \
     && echo 'extension=mysqli.so' >> /etc/php.ini \
     && rm -rf /etc/httpd/conf.d/* \
+    && rm -rf /run/httpd/httpd.pid \
     && ln -sf /dev/stdout /var/log/httpd/access_log \
     && ln -sf /dev/stderr /var/log/httpd/error_log 
 
